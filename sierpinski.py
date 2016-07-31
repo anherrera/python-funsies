@@ -2,19 +2,30 @@ def sierpinski(n):
 	pattern = draw(n, 'L', 0)
 	return pattern
 
+
 def draw(n, pattern, idx):
+	"""
+	Recursive function to draw the fractal until n is reached
+	"""
 	if idx == n:
 		return pattern
 	else:
-		return draw(n, make_triangle(pattern), idx+1)
+		return draw(n, make_triangle(pattern), idx + 1)
+
 
 def make_triangle(pattern):
-	output = pattern
-	output += "\n"
-	output += next_to_each_other(pattern)
-	return output
+	"""
+	Takes the pattern, then puts the pattern repeated twice horizontally
+	underneath it
+	"""
+	return "\n".join([pattern, next_to_each_other(pattern)])
+
 
 def next_to_each_other(pattern):
+	"""
+	Takes the pattern, pads it to its widest point + 1, then appends the
+	same pattern horizontally
+	"""
 	lines = pattern.splitlines()
 	widest = len(max(lines, key=len)) + 1
 
